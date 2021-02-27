@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import InfoBar from "../infobar/infoBar";
-import Input from "../Input/input"
+import Input from "../Input/input";
+import Messages from "../Messages/messages";
 import "./chat.css";
 let socket;
 
@@ -20,7 +21,10 @@ const Chat = ({ location }) => {
     setName(name);
     setRoom(room);
     console.log(name, room);
-    socket.emit("join", { name, room }, () => {});
+    socket.emit("join", { name, room }, (status) => {
+      window.location.href='/'
+      alert(status.err)
+    });
   }, [ENDPOINT, location.state]);
 
   useEffect(() => {
@@ -29,19 +33,25 @@ const Chat = ({ location }) => {
     });
   }, [messages]);
   const sendMessage = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (message) {
       socket.emit("sendMessage", message, () => setMessage(""));
     }
   };
   console.log(messages);
+
   return (
     <div className="outerContainer">
       <div className="container">
-          <InfoBar room={room} />
-          <Input message={message} setMessage={setMessage} sendMessage={sendMessage} /> 
+        <InfoBar room={room} />
+        <Messages name={name} messages={messages} ></Messages>
+        <Input
+          message={message}
+          setMessage={setMessage}
+          sendMessage={sendMessage}
+        />
       </div>
     </div>
   );
-}
+};
 export default Chat;

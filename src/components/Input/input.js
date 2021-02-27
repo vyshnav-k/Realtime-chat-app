@@ -1,6 +1,5 @@
 import React from "react";
 
-import "./input.js";
 import "./input.css";
 
 const Input = ({ message,setMessage,sendMessage}) => (
@@ -17,7 +16,7 @@ const Input = ({ message,setMessage,sendMessage}) => (
         }
       }}
     ></input>
-    <button className="sendButton">Send</button>
+    <button className="sendButton" onClick={(event)=>sendMessage(event)}>Send</button>
   </form>
 );
 

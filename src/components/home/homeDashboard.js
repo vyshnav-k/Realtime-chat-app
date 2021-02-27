@@ -9,6 +9,9 @@ const HomeDashboard = () => {
     <div className="homeOuterContainer">
       <div className="homeInnerContainer">
         <h1 className="heading">Join</h1>
+        <form>
+          
+       
         <div>
           <input
             placeholder="Name"
@@ -28,6 +31,7 @@ const HomeDashboard = () => {
             Join
           </button>
         </Link>
+        </form>
       </div>
     </div>
   );
